@@ -1,0 +1,38 @@
+{
+  "name": "raw.macro",
+  "version": "0.0.0",
+  "main": "dist/raw.macro.js",
+  "license": "MIT",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "test": "jest --coverage",
+    "build": "microbundle -i src/index.js -o dist",
+    "format": "prettier --write",
+    "ci": "npm run test -- --ci && npm run build",
+    "precommit": "lint-staged"
+  },
+  "dependencies": {
+    "babel-plugin-macros": "^2.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-tester": "^5.0.0",
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.3.0",
+    "microbundle": "^0.4.3",
+    "prettier": "^1.10.2"
+  },
+  "jest": {
+    "testRegex": "__tests__/.*.test.js$"
+  },
+  "lint-staged": {
+    "*.{js,md}": [
+      "prettier --write",
+      "git add -A"
+    ]
+  }
+}

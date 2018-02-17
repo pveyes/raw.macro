@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros correct usage: correct usage 1`] = `
+"
+import raw from '../macro';
+
+const md = raw('./fixtures/markdown.md');
+const js = raw('./fixtures/javascript.js');
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const md = \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\";
+const js =
+  'const sum = require(\\"../sum\\");\\\\n\\\\ntest(\\"add two numbers\\", () => {\\\\n  const result = sum(1, 2);\\\\n  expect(result).toEqual(3);\\\\n});\\\\n';
+
+"
+`;
+
+exports[`macros no usage: no usage 1`] = `
+"
+import raw from '../macro'
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+
+"
+`;
