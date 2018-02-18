@@ -1,16 +1,31 @@
 {
   "name": "raw.macro",
+  "description": "Read file contents at build time, similar to webpack raw-loader",
   "version": "0.1.0",
   "main": "dist/raw.macro.js",
   "license": "MIT",
   "files": [
     "dist/"
   ],
+  "keywords": [
+    "webpack",
+    "raw-loader",
+    "raw",
+    "string",
+    "babel",
+    "babel-macros",
+    "babel-plugin-macros"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pveyes/raw.macro.git"
+  },
   "scripts": {
     "test": "jest --coverage",
     "build": "microbundle -i src/index.js -o dist",
     "format": "prettier --write",
     "ci": "npm run test -- --ci && npm run build",
+    "prepare": "npm run build",
     "precommit": "lint-staged"
   },
   "dependencies": {
