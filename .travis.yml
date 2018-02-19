@@ -9,6 +9,3 @@ node_js:
   - 8
 
 script: npm run ci
-
-branches:
-  only: master
