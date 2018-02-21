@@ -31,7 +31,7 @@
   "dependencies": {
     "babel-plugin-macros": "^2.1.0",
     "husky": "^0.14.3",
-    "lint-staged": "^6.1.1"
+    "lint-staged": "^7.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
