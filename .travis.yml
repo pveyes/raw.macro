@@ -7,5 +7,6 @@ notifications:
 node_js:
   - 6
   - 8
+  - 10
 
 script: npm run ci
