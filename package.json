@@ -29,15 +29,15 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "babel-plugin-macros": "^2.1.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.0.0"
+    "babel-plugin-macros": "^2.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-tester": "^5.0.0",
     "babel-preset-env": "^1.6.1",
+    "husky": "^0.14.3",
     "jest": "^22.3.0",
+    "lint-staged": "^7.0.0",
     "microbundle": "^0.5.0",
     "prettier": "^1.10.2"
   },
