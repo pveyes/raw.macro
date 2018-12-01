@@ -38,7 +38,7 @@
     "husky": "^1.0.0",
     "jest": "^22.3.0",
     "lint-staged": "^7.0.0",
-    "microbundle": "^0.7.0",
+    "microbundle": "^0.8.1",
     "prettier": "^1.10.2"
   },
   "jest": {
