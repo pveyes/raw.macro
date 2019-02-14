@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-plugin-tester": "^5.0.0",
+    "babel-plugin-tester": "^6.0.0",
     "babel-preset-env": "^1.6.1",
     "husky": "^1.0.0",
     "jest": "^22.3.0",
