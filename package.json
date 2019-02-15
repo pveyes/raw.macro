@@ -29,7 +29,8 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
-    "babel-plugin-macros": "^2.1.0"
+    "babel-plugin-macros": "^2.1.0",
+    "resolve": "^1.10.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

@@ -4,11 +4,14 @@ exports[`macros correct usage: correct usage 1`] = `
 "
 import raw from '../macro';
 
+const macro = raw('raw.macro');
 const md = raw('./fixtures/markdown.md');
 const js = raw('./fixtures/javascript.js');
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
+const macro =
+  '/* istanbul ignore next */\\\\nimport macro from \\"./macro\\";\\\\n\\\\nexport default macro;\\\\n';
 const md = \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\";
 const js =
   'const sum = require(\\"../sum\\");\\\\n\\\\ntest(\\"add two numbers\\", () => {\\\\n  const result = sum(1, 2);\\\\n  expect(result).toEqual(3);\\\\n});\\\\n';
