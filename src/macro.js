@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs");
-const resolve = require("resolve");
 const { createMacro } = require("babel-plugin-macros");
 
 export default createMacro(rawMacros);
@@ -39,7 +38,7 @@ function requireRaw({ referencePath, state, babel }) {
     );
   }
 
-  const fullPath = resolve.sync(rawPath, { basedir: dirname });
+  const fullPath = require.resolve(rawPath, { paths: [dirname] });
   const fileContent = fs.readFileSync(fullPath, { encoding: "utf-8" });
 
   referencePath.parentPath.replaceWith(
