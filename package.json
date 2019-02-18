@@ -2,6 +2,9 @@
   "name": "raw.macro",
   "description": "Read file contents at build time, similar to webpack raw-loader",
   "version": "0.2.0",
+  "engines": {
+    "node": ">=8.9.0"
+  },
   "main": "dist/raw.macro.js",
   "license": "MIT",
   "files": [
