@@ -1,14 +1,15 @@
 {
   "name": "raw.macro",
-  "description":
-    "Read file contents at build time, similar to webpack raw-loader",
-  "version": "0.2.0",
+  "description": "Read file contents at build time, similar to webpack raw-loader",
+  "version": "0.3.0",
   "engines": {
     "node": ">=8.9.0"
   },
   "main": "dist/raw.macro.js",
   "license": "MIT",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "keywords": [
     "webpack",
     "raw-loader",
@@ -47,6 +48,9 @@
     "testRegex": "__tests__/.*.test.js$"
   },
   "lint-staged": {
-    "*.{js,md}": ["prettier --write", "git add -A"]
+    "*.{js,md}": [
+      "prettier --write",
+      "git add -A"
+    ]
   }
 }
