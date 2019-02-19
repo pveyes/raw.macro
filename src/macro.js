@@ -38,7 +38,7 @@ function requireRaw({ referencePath, state, babel }) {
     );
   }
 
-  const fullPath = path.resolve(dirname, rawPath);
+  const fullPath = require.resolve(rawPath, { paths: [dirname] });
   const fileContent = fs.readFileSync(fullPath, { encoding: "utf-8" });
 
   referencePath.parentPath.replaceWith(
