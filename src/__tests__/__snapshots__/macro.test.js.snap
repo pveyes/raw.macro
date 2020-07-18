@@ -60,13 +60,13 @@ const data = dynamic('markdown.md')
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-var __raw_dynamic__1 = {
+var __raw_dynamic__0 = {
   mark: \\"## Another markdown\\\\n\\",
   markdown: \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
 };
 
 function dynamic(fileName) {
-  const md = __raw_dynamic__1[fileName];
+  const md = __raw_dynamic__0[fileName];
   return md;
 }
 
@@ -83,7 +83,7 @@ const md = raw(\`./fixtures/\${locale}/\${fileName}.md\`);
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-var __raw_dynamic__2 = {
+var __raw_dynamic__0 = {
   en: {
     \\"post.md\\": \\"English\\\\n\\",
   },
@@ -91,7 +91,7 @@ var __raw_dynamic__2 = {
     \\"post.md\\": \\"Bahasa\\\\n\\",
   },
 };
-const md = __raw_dynamic__2[locale][fileName];
+const md = __raw_dynamic__0[locale][fileName];
 
 "
 `;
@@ -106,18 +106,18 @@ const a2 = raw(\`./fixtures/\${fileName}\`);
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
-var __raw_dynamic__4 = {
+var __raw_dynamic__1 = {
   \\"javascript.js\\":
     'const sum = require(\\"../sum\\");\\\\n\\\\ntest(\\"add two numbers\\", () => {\\\\n  const result = sum(1, 2);\\\\n  expect(result).toEqual(3);\\\\n});\\\\n',
   \\"mark.md\\": \\"## Another markdown\\\\n\\",
   \\"markdown.md\\": \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
 };
-var __raw_dynamic__3 = {
+var __raw_dynamic__0 = {
   fixtures: \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
 };
 const a0 = \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\";
-const a1 = __raw_dynamic__3[fixtureDir];
-const a2 = __raw_dynamic__4[fileName];
+const a1 = __raw_dynamic__0[fixtureDir];
+const a2 = __raw_dynamic__1[fileName];
 
 "
 `;

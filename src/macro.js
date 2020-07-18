@@ -4,10 +4,18 @@ const { createMacro } = require("babel-plugin-macros");
 
 export default createMacro(rawMacros);
 
+const RAW_DYNAMIC_VARIABLE_NAME_PREFIX = "__raw_dynamic__";
+
 function rawMacros({ references, state, babel }) {
+  // we define counter here so it always starts from 0 for different file
+  // we use object so we can mutate inside requireRaw
+  let usageCounter = {
+    value: 0,
+  };
+
   references.default.forEach(referencePath => {
     if (referencePath.parentPath.type === "CallExpression") {
-      requireRaw({ referencePath, state, babel });
+      requireRaw({ referencePath, state, babel, usageCounter });
     } else {
       throw new Error(
         `This is not supported: \`${referencePath
@@ -18,10 +26,7 @@ function rawMacros({ references, state, babel }) {
   });
 }
 
-let dynamicVariableNameIndex = 0;
-const RAW_DYNAMIC_VARIABLE_NAME_PREFIX = "__raw_dynamic__";
-
-function requireRaw({ referencePath, state, babel }) {
+function requireRaw({ referencePath, state, babel, usageCounter }) {
   const filename = state.file.opts.filename;
   const t = babel.types;
   const callExpressionPath = referencePath.parentPath;
@@ -48,7 +53,8 @@ function requireRaw({ referencePath, state, babel }) {
       }
 
       const dynamicVariableName =
-        RAW_DYNAMIC_VARIABLE_NAME_PREFIX + dynamicVariableNameIndex;
+        RAW_DYNAMIC_VARIABLE_NAME_PREFIX + usageCounter.value;
+      usageCounter.value++;
 
       const variables = expressions.map((node, idx) => {
         const isDirectory =
@@ -122,8 +128,6 @@ function requireRaw({ referencePath, state, babel }) {
           ),
         ]),
       );
-
-      dynamicVariableNameIndex++;
 
       callExpressionPath.replaceWith(
         t.expressionStatement(
