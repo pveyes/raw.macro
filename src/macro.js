@@ -83,13 +83,13 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
         .flatMap(p => {
           if (!variables[0].isDirectory) {
             if (p.endsWith(quasis[1].value.raw)) {
-              return [p.replace(quasis[1].value.raw, "")];
+              return p.replace(quasis[1].value.raw, "");
             } else {
               return [];
             }
           }
 
-          return [p];
+          return p;
         });
 
       // start from index 1 because index 0 is always base directory
