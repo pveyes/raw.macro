@@ -29,7 +29,7 @@ pluginTester({
         return md;
       }
 
-      const data = dynamic('en-id')
+      const data = dynamic('en')
     `,
     "dynamic import file name": `
       import raw from '../macro';

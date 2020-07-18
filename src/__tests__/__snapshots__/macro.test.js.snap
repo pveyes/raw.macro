@@ -28,7 +28,7 @@ function dynamic(locale) {
   return md;
 }
 
-const data = dynamic('en-id')
+const data = dynamic('en')
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
@@ -42,7 +42,7 @@ function dynamic(locale) {
   return md;
 }
 
-const data = dynamic(\\"en-id\\");
+const data = dynamic(\\"en\\");
 
 "
 `;
