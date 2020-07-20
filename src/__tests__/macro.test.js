@@ -1,5 +1,5 @@
 const path = require("path");
-const pluginTester = require("babel-plugin-tester");
+const pluginTester = require("babel-plugin-tester").default;
 const plugin = require("babel-plugin-macros");
 const prettier = require("prettier");
 
@@ -10,7 +10,7 @@ pluginTester({
     filename: __filename,
   },
   formatResult(result) {
-    return prettier.format(result, { trailingComma: "es5" });
+    return prettier.format(result, { trailingComma: "es5", parser: 'babel' });
   },
   tests: {
     "no usage": `import raw from '../macro'`,
