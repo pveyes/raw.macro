@@ -23,6 +23,10 @@ import raw from "raw.macro";
 const markdown = raw("./README.md");
 ```
 
+**Note: Because raw.macro uses babel internally to replace `raw()` calls, your transpiled code won't be changed if you only change the file that you import. This is because from babel perspective, your JS file is unchanged**
+
+One workaround that you can do that doesn't involve restarting your build system is making small changes where you put `raw()` calls, for example by adding `console.log()` with different content.
+
 ### Dynamic path import
 
 You can also use import dynamic path using [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). You can even use them inside a function / React component!
