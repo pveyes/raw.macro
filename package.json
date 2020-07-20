@@ -5,6 +5,7 @@
   "engines": {
     "node": ">=8.9.0"
   },
+  "source": "src/macro.js",
   "main": "dist/raw.macro.js",
   "types": "raw.macro.d.ts",
   "license": "MIT",
@@ -27,32 +28,31 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "microbundle -i src/index.js -o dist",
+    "build": "microbundle",
     "format": "prettier --write",
     "ci": "npm run test -- --ci && npm run build",
-    "prepare": "npm run build",
-    "precommit": "lint-staged"
+    "prepare": "npm run build"
   },
   "dependencies": {
-    "babel-plugin-macros": "^2.1.0"
+    "babel-plugin-macros": "^2.8.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.3",
-    "@babel/preset-env": "^7.3.1",
-    "babel-plugin-tester": "^6.0.0",
-    "husky": "^2.0.0",
-    "jest": "^24.1.0",
+    "@babel/core": "^7.10.5",
+    "babel-plugin-tester": "^9.2.0",
+    "husky": "^4.2.5",
+    "jest": "^26.1.0",
     "lint-staged": "^7.0.0",
-    "microbundle": "^0.7.0",
-    "prettier": "^1.10.2"
+    "microbundle": "^0.12.3",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "rollup": "^2.22.1"
   },
   "jest": {
     "testRegex": "__tests__/.*.test.js$"
   },
-  "lint-staged": {
-    "*.{js,md}": [
-      "prettier --write",
-      "git add -A"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick"
+    }
   }
 }

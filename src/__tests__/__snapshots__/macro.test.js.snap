@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`macros correct usage: correct usage 1`] = `
-"
+
 import raw from '../macro';
 
 const macro = raw('raw.macro');
@@ -11,16 +11,16 @@ const js = raw('./fixtures/javascript.js');
       ↓ ↓ ↓ ↓ ↓ ↓
 
 const macro =
-  '/* istanbul ignore next */\\\\nimport macro from \\"./macro\\";\\\\n\\\\nexport default macro;\\\\n';
-const md = \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\";
+  '/* istanbul ignore next */\\nimport macro from "./macro";\\n\\nexport default macro;\\n';
+const md = "# This is the title\\n\\nThis is the description\\n";
 const js =
-  'const sum = require(\\"../sum\\");\\\\n\\\\ntest(\\"add two numbers\\", () => {\\\\n  const result = sum(1, 2);\\\\n  expect(result).toEqual(3);\\\\n});\\\\n';
+  'const sum = require("../sum");\\n\\ntest("add two numbers", () => {\\n  const result = sum(1, 2);\\n  expect(result).toEqual(3);\\n});\\n';
 
-"
+
 `;
 
 exports[`macros dynamic import directory: dynamic import directory 1`] = `
-"
+
 import raw from '../macro';
 
 function dynamic(locale) {
@@ -33,8 +33,8 @@ const data = dynamic('en')
       ↓ ↓ ↓ ↓ ↓ ↓
 
 var __raw_dynamic__0 = {
-  en: \\"English\\\\n\\",
-  id: \\"Bahasa\\\\n\\",
+  en: "English\\n",
+  id: "Bahasa\\n",
 };
 
 function dynamic(locale) {
@@ -42,13 +42,13 @@ function dynamic(locale) {
   return md;
 }
 
-const data = dynamic(\\"en\\");
+const data = dynamic("en");
 
-"
+
 `;
 
 exports[`macros dynamic import file name: dynamic import file name 1`] = `
-"
+
 import raw from '../macro';
 
 function dynamic(fileName) {
@@ -61,8 +61,8 @@ const data = dynamic('markdown.md')
       ↓ ↓ ↓ ↓ ↓ ↓
 
 var __raw_dynamic__0 = {
-  mark: \\"## Another markdown\\\\n\\",
-  markdown: \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
+  mark: "## Another markdown\\n",
+  markdown: "# This is the title\\n\\nThis is the description\\n",
 };
 
 function dynamic(fileName) {
@@ -70,13 +70,13 @@ function dynamic(fileName) {
   return md;
 }
 
-const data = dynamic(\\"markdown.md\\");
+const data = dynamic("markdown.md");
 
-"
+
 `;
 
 exports[`macros dynamic import multiple variable: dynamic import multiple variable 1`] = `
-"
+
 import raw from '../macro';
 
 const md = raw(\`./fixtures/\${locale}/\${fileName}.md\`);
@@ -85,19 +85,19 @@ const md = raw(\`./fixtures/\${locale}/\${fileName}.md\`);
 
 var __raw_dynamic__0 = {
   en: {
-    \\"post.md\\": \\"English\\\\n\\",
+    "post.md": "English\\n",
   },
   id: {
-    \\"post.md\\": \\"Bahasa\\\\n\\",
+    "post.md": "Bahasa\\n",
   },
 };
 const md = __raw_dynamic__0[locale][fileName];
 
-"
+
 `;
 
 exports[`macros multiple dynamic import: multiple dynamic import 1`] = `
-"
+
 import raw from '../macro';
 
 const a0 = raw('./fixtures/markdown.md');
@@ -107,27 +107,27 @@ const a2 = raw(\`./fixtures/\${fileName}\`);
       ↓ ↓ ↓ ↓ ↓ ↓
 
 var __raw_dynamic__1 = {
-  \\"javascript.js\\":
-    'const sum = require(\\"../sum\\");\\\\n\\\\ntest(\\"add two numbers\\", () => {\\\\n  const result = sum(1, 2);\\\\n  expect(result).toEqual(3);\\\\n});\\\\n',
-  \\"mark.md\\": \\"## Another markdown\\\\n\\",
-  \\"markdown.md\\": \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
+  "javascript.js":
+    'const sum = require("../sum");\\n\\ntest("add two numbers", () => {\\n  const result = sum(1, 2);\\n  expect(result).toEqual(3);\\n});\\n',
+  "mark.md": "## Another markdown\\n",
+  "markdown.md": "# This is the title\\n\\nThis is the description\\n",
 };
 var __raw_dynamic__0 = {
-  fixtures: \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\",
+  fixtures: "# This is the title\\n\\nThis is the description\\n",
 };
-const a0 = \\"# This is the title\\\\n\\\\nThis is the description\\\\n\\";
+const a0 = "# This is the title\\n\\nThis is the description\\n";
 const a1 = __raw_dynamic__0[fixtureDir];
 const a2 = __raw_dynamic__1[fileName];
 
-"
+
 `;
 
 exports[`macros no usage: no usage 1`] = `
-"
+
 import raw from '../macro'
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
 
-"
+
 `;

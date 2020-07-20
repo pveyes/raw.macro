@@ -2,7 +2,7 @@ const path = require("path");
 const fs = require("fs");
 const { createMacro } = require("babel-plugin-macros");
 
-export default createMacro(rawMacros);
+module.exports = createMacro(rawMacros);
 
 const RAW_DYNAMIC_VARIABLE_NAME_PREFIX = "__raw_dynamic__";
 
@@ -146,7 +146,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   if (rawPath === undefined) {
     throw new Error(
       `There was a problem evaluating the value of the argument for the code: ${callExpressionPath.getSource()}. ` +
-        `If the value is dynamic, please make sure that its value is statically deterministic.`,
+      `If the value is dynamic, please make sure that its value is statically deterministic.`,
     );
   }
 
