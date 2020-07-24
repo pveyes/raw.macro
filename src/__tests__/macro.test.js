@@ -10,7 +10,7 @@ pluginTester({
     filename: __filename,
   },
   formatResult(result) {
-    return prettier.format(result, { trailingComma: "es5", parser: 'babel' });
+    return prettier.format(result, { trailingComma: "es5", parser: "babel" });
   },
   tests: {
     "no usage": `import raw from '../macro'`,
@@ -20,6 +20,13 @@ pluginTester({
       const macro = raw('raw.macro');
       const md = raw('./fixtures/markdown.md');
       const js = raw('./fixtures/javascript.js');
+    `,
+    "static template literal": `
+      import raw from '../macro';
+      
+      const macro = raw('raw.macro');
+      const md = raw(\`./fixtures/markdown.md\`);
+      const js = raw(\`./fixtures/javascript.js\`);
     `,
     "dynamic import directory": `
       import raw from '../macro';

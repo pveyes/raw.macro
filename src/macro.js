@@ -13,7 +13,7 @@ function rawMacros({ references, state, babel }) {
     value: 0,
   };
 
-  references.default.forEach(referencePath => {
+  references.default.forEach((referencePath) => {
     if (referencePath.parentPath.type === "CallExpression") {
       requireRaw({ referencePath, state, babel, usageCounter });
     } else {
@@ -38,6 +38,11 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   switch (arg.node.type) {
     case "TemplateLiteral": {
       const { expressions, quasis } = arg.node;
+
+      if (expressions.length === 0) {
+        rawPath = quasis[0].value.raw;
+        break;
+      }
 
       const isInvalidTemplateLiteral = quasis[0].value.raw === "";
       if (isInvalidTemplateLiteral) {
@@ -70,7 +75,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
       const rootDir = path.join(dirname, quasis[0].value.raw);
       const pathEntries = fs
         .readdirSync(rootDir)
-        .filter(p => {
+        .filter((p) => {
           try {
             return (
               fs.lstatSync(path.join(rootDir, p)).isDirectory() ===
@@ -80,7 +85,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
             return false;
           }
         })
-        .flatMap(p => {
+        .flatMap((p) => {
           if (!variables[0].isDirectory) {
             if (p.endsWith(quasis[1].value.raw)) {
               return p.replace(quasis[1].value.raw, "");
@@ -101,7 +106,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
           pathEntries.forEach((traversedPath, j) => {
             if (!quasi.tail) {
               const traversedDirname = path.join(rootDir, traversedPath);
-              const paths = fs.readdirSync(traversedDirname).filter(p => {
+              const paths = fs.readdirSync(traversedDirname).filter((p) => {
                 // quasi loop happen after .slice(1) call which means next quasi is
                 // i+2 instead of i+1
                 return p.endsWith(quasis[i + 2].value.raw);
@@ -146,7 +151,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   if (rawPath === undefined) {
     throw new Error(
       `There was a problem evaluating the value of the argument for the code: ${callExpressionPath.getSource()}. ` +
-      `If the value is dynamic, please make sure that its value is statically deterministic.`,
+        `If the value is dynamic, please make sure that its value is statically deterministic.`,
     );
   }
 
@@ -166,7 +171,7 @@ function createObjectASTFromPathEntries(
 ) {
   return t.objectExpression(
     pathEntries
-      .map(entry => {
+      .map((entry) => {
         if (Array.isArray(entry)) {
           return t.objectProperty(
             t.stringLiteral(entry[0]),
