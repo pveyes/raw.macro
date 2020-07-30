@@ -96,6 +96,18 @@ const md = __raw_dynamic__0[locale][fileName];
 
 `;
 
+exports[`macros invalid file in dynamic directory: invalid file in dynamic directory 1`] = `
+
+import raw from '../macro';
+
+const a1 = raw(\`./\${fixtureDir}/index.js\`);
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+Error: /Users/fatih/dev/pveyes/raw.macro/src/__tests__/macro.test.js: ../macro: Cannot resolve file /index.js in these directories: __snapshots__, fixtures, node_modules
+
+`;
+
 exports[`macros multiple dynamic import: multiple dynamic import 1`] = `
 
 import raw from '../macro';

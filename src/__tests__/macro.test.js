@@ -3,7 +3,7 @@ const pluginTester = require("babel-plugin-tester").default;
 const plugin = require("babel-plugin-macros");
 const prettier = require("prettier");
 
-pluginTester({
+const testConfig = {
   plugin,
   snapshot: true,
   babelOptions: {
@@ -12,6 +12,10 @@ pluginTester({
   formatResult(result) {
     return prettier.format(result, { trailingComma: "es5", parser: "babel" });
   },
+}
+
+pluginTester({
+  ...testConfig,
   tests: {
     "no usage": `import raw from '../macro'`,
     "correct usage": `
@@ -61,4 +65,16 @@ pluginTester({
       const a2 = raw(\`./fixtures/\${fileName}\`);
     `,
   },
+});
+
+pluginTester({
+  ...testConfig,
+  error: true,
+  tests: {
+    "invalid file in dynamic directory": `
+      import raw from '../macro';
+
+      const a1 = raw(\`./\${fixtureDir}/index.js\`);
+    `,
+  }
 });

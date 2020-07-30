@@ -151,7 +151,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   if (rawPath === undefined) {
     throw new Error(
       `There was a problem evaluating the value of the argument for the code: ${callExpressionPath.getSource()}. ` +
-        `If the value is dynamic, please make sure that its value is statically deterministic.`,
+      `If the value is dynamic, please make sure that its value is statically deterministic.`,
     );
   }
 
@@ -169,35 +169,39 @@ function createObjectASTFromPathEntries(
   rootDir,
   fileName = "",
 ) {
-  return t.objectExpression(
-    pathEntries
-      .map((entry) => {
-        if (Array.isArray(entry)) {
-          return t.objectProperty(
-            t.stringLiteral(entry[0]),
-            createObjectASTFromPathEntries(
-              t,
-              entry[1],
-              path.join(rootDir, entry[0]),
-            ),
-          );
-        }
+  const objectProperties = pathEntries
+    .map((entry) => {
+      if (Array.isArray(entry)) {
+        return t.objectProperty(
+          t.stringLiteral(entry[0]),
+          createObjectASTFromPathEntries(
+            t,
+            entry[1],
+            path.join(rootDir, entry[0]),
+          ),
+        );
+      }
 
-        try {
-          const rawPath = entry + fileName;
-          const fullPath = require.resolve(rawPath, {
-            paths: [rootDir],
-          });
-          return t.objectProperty(
-            t.stringLiteral(entry),
-            t.stringLiteral(fs.readFileSync(fullPath, "utf-8")),
-          );
-        } catch (err) {
-          return null;
-        }
-      })
-      .filter(Boolean),
-  );
+      try {
+        const rawPath = entry + fileName;
+        const fullPath = require.resolve(rawPath, {
+          paths: [rootDir],
+        });
+        return t.objectProperty(
+          t.stringLiteral(entry),
+          t.stringLiteral(fs.readFileSync(fullPath, "utf-8")),
+        );
+      } catch (err) {
+        return null;
+      }
+    })
+    .filter(Boolean);
+
+  if (objectProperties.length === 0) {
+    throw new Error(`Cannot resolve file ${fileName} in these directories: ${pathEntries.join(', ')}`)
+  }
+
+  return t.objectExpression(objectProperties);
 }
 
 function getProgramPath(path) {
