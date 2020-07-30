@@ -85,10 +85,10 @@ const md = raw(\`./fixtures/\${locale}/\${fileName}.md\`);
 
 var __raw_dynamic__0 = {
   en: {
-    "post.md": "English\\n",
+    post: "English\\n",
   },
   id: {
-    "post.md": "Bahasa\\n",
+    post: "Bahasa\\n",
   },
 };
 const md = __raw_dynamic__0[locale][fileName];

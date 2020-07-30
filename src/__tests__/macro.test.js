@@ -20,7 +20,7 @@ pluginTester({
     "no usage": `import raw from '../macro'`,
     "correct usage": `
       import raw from '../macro';
-      
+
       const macro = raw('raw.macro');
       const md = raw('./fixtures/markdown.md');
       const js = raw('./fixtures/javascript.js');

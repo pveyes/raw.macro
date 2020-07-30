@@ -178,17 +178,21 @@ function createObjectASTFromPathEntries(
             t,
             entry[1],
             path.join(rootDir, entry[0]),
+            fileName,
           ),
         );
       }
 
       try {
-        const rawPath = entry + fileName;
+        const rawPath =
+          fileName.startsWith(".") && entry.endsWith(fileName)
+            ? entry
+            : entry + fileName;
         const fullPath = require.resolve(rawPath, {
           paths: [rootDir],
         });
         return t.objectProperty(
-          t.stringLiteral(entry),
+          t.stringLiteral(entry.replace(fileName, "")),
           t.stringLiteral(fs.readFileSync(fullPath, "utf-8")),
         );
       } catch (err) {
