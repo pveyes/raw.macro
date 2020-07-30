@@ -151,7 +151,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   if (rawPath === undefined) {
     throw new Error(
       `There was a problem evaluating the value of the argument for the code: ${callExpressionPath.getSource()}. ` +
-      `If the value is dynamic, please make sure that its value is statically deterministic.`,
+        `If the value is dynamic, please make sure that its value is statically deterministic.`,
     );
   }
 
@@ -198,7 +198,11 @@ function createObjectASTFromPathEntries(
     .filter(Boolean);
 
   if (objectProperties.length === 0) {
-    throw new Error(`Cannot resolve file ${fileName} in these directories: ${pathEntries.join(', ')}`)
+    throw new Error(
+      `Cannot resolve file ${fileName} in these directories: ${pathEntries.join(
+        ", ",
+      )}`,
+    );
   }
 
   return t.objectExpression(objectProperties);

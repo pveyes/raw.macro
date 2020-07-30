@@ -12,7 +12,7 @@ const testConfig = {
   formatResult(result) {
     return prettier.format(result, { trailingComma: "es5", parser: "babel" });
   },
-}
+};
 
 pluginTester({
   ...testConfig,
@@ -76,5 +76,15 @@ pluginTester({
 
       const a1 = raw(\`./\${fixtureDir}/index.js\`);
     `,
-  }
+    "invalid dynamic value at the start of template literal": `
+      import raw from '../macro';
+
+      const a1 = raw(\`\${fixtureDir}/javascript.js\`);
+    `,
+    "invalid dynamic values exceed limit": `
+      import raw from '../macro';
+
+      const a1 = raw(\`./\${anotherDir}/\${fixtureDir}/\${fileName}.md\`);
+    `,
+  },
 });
