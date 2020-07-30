@@ -3,7 +3,7 @@ const pluginTester = require("babel-plugin-tester").default;
 const plugin = require("babel-plugin-macros");
 const prettier = require("prettier");
 
-pluginTester({
+const testConfig = {
   plugin,
   snapshot: true,
   babelOptions: {
@@ -12,11 +12,15 @@ pluginTester({
   formatResult(result) {
     return prettier.format(result, { trailingComma: "es5", parser: "babel" });
   },
+};
+
+pluginTester({
+  ...testConfig,
   tests: {
     "no usage": `import raw from '../macro'`,
     "correct usage": `
       import raw from '../macro';
-      
+
       const macro = raw('raw.macro');
       const md = raw('./fixtures/markdown.md');
       const js = raw('./fixtures/javascript.js');
@@ -59,6 +63,28 @@ pluginTester({
       const a0 = raw('./fixtures/markdown.md');
       const a1 = raw(\`./\${fixtureDir}/markdown.md\`);
       const a2 = raw(\`./fixtures/\${fileName}\`);
+    `,
+  },
+});
+
+pluginTester({
+  ...testConfig,
+  error: true,
+  tests: {
+    "invalid file in dynamic directory": `
+      import raw from '../macro';
+
+      const a1 = raw(\`./\${fixtureDir}/index.js\`);
+    `,
+    "invalid dynamic value at the start of template literal": `
+      import raw from '../macro';
+
+      const a1 = raw(\`\${fixtureDir}/javascript.js\`);
+    `,
+    "invalid dynamic values exceed limit": `
+      import raw from '../macro';
+
+      const a1 = raw(\`./\${anotherDir}/\${fixtureDir}/\${fileName}.md\`);
     `,
   },
 });
