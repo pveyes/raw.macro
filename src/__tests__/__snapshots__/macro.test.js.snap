@@ -56,7 +56,7 @@ function dynamic(fileName) {
   return md;
 }
 
-const data = dynamic('markdown.md')
+const data = dynamic('markdown')
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
@@ -70,7 +70,7 @@ function dynamic(fileName) {
   return md;
 }
 
-const data = dynamic("markdown.md");
+const data = dynamic("markdown");
 
 
 `;
@@ -164,6 +164,21 @@ import raw from '../macro'
 
       ↓ ↓ ↓ ↓ ↓ ↓
 
+
+
+`;
+
+exports[`macros static template literal using interpolation: static template literal using interpolation 1`] = `
+
+import raw from '../macro';
+
+const fileName = 'markdown';
+const md = raw(\`./fixtures/\${fileName}.md\`);
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const fileName = "markdown";
+const md = "# This is the title\\n\\nThis is the description\\n";
 
 
 `;

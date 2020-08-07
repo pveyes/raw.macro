@@ -39,10 +39,22 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
     case "TemplateLiteral": {
       const { expressions, quasis } = arg.node;
 
+      // No expressions means no dynamic values, so we can treat it
+      // the same way as string literal
       if (expressions.length === 0) {
         rawPath = quasis[0].value.raw;
         break;
       }
+
+      try {
+        // Try to evaluate template literal, in case it's a constant
+        // https://github.com/pveyes/raw.macro/issues/43
+        rawPath = callExpressionPath.get("arguments")[0].evaluate().value;
+
+        if (rawPath !== undefined) {
+          break;
+        }
+      } catch (err) {}
 
       const isInvalidTemplateLiteral = quasis[0].value.raw === "";
       if (isInvalidTemplateLiteral) {
@@ -188,7 +200,10 @@ function createObjectASTFromPathEntries(
           fileName.startsWith(".") && entry.endsWith(fileName)
             ? entry
             : entry + fileName;
-        const fullPath = require.resolve(rawPath, {
+
+        // require.resolve for dynamic value works properly (in test and in actual usage)
+        // when filename is prefixed with relative path.
+        const fullPath = require.resolve(`./${rawPath}`, {
           paths: [rootDir],
         });
         return t.objectProperty(
