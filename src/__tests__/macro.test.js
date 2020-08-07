@@ -32,6 +32,12 @@ pluginTester({
       const md = raw(\`./fixtures/markdown.md\`);
       const js = raw(\`./fixtures/javascript.js\`);
     `,
+    "static template literal using interpolation": `
+      import raw from '../macro';
+
+      const fileName = 'markdown';
+      const md = raw(\`./fixtures/\${fileName}.md\`);
+    `,
     "dynamic import directory": `
       import raw from '../macro';
 
@@ -50,7 +56,7 @@ pluginTester({
         return md;
       }
 
-      const data = dynamic('markdown.md')
+      const data = dynamic('markdown')
     `,
     "dynamic import multiple variable": `
       import raw from '../macro';
