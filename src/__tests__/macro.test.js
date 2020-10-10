@@ -5,7 +5,6 @@ const prettier = require("prettier");
 
 const testConfig = {
   plugin,
-  snapshot: true,
   babelOptions: {
     filename: __filename,
   },
@@ -16,6 +15,7 @@ const testConfig = {
 
 pluginTester({
   ...testConfig,
+  snapshot: true,
   tests: {
     "no usage": `import raw from '../macro'`,
     "correct usage": `

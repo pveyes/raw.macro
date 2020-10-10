@@ -1,6 +1,6 @@
 # raw.macro
 
-[![Build Status](https://travis-ci.org/pveyes/raw.macro.svg?branch=master)](https://travis-ci.org/pveyes/raw.macro) [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros) [![Greenkeeper badge](https://badges.greenkeeper.io/pveyes/raw.macro.svg)](https://greenkeeper.io/)
+[![Actions Status](https://github.com/pveyes/raw.macro/workflows/build/badge.svg)](https://github.com/pveyes/raw.macro/actions) [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros)
 
 > Webpack [`raw-loader`](https://github.com/webpack-contrib/raw-loader) implemented as [`babel-plugin-macros`](https://github.com/kentcdodds/babel-plugin-macros)
 
@@ -10,8 +10,11 @@ In order to use raw.macro in your own project, you can use one of the following 
 
 ```
 $ yarn add --dev raw.macro
+# or
 $ npm install --save-dev raw.macro
 ```
+
+Make sure `babel-plugin-macros` already installed. If you're using [Create React App](https://github.com/facebook/create-react-app), it's installed by default.
 
 ## Usage
 

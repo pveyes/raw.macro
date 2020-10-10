@@ -3,7 +3,7 @@
   "description": "Read file contents at build time, similar to webpack raw-loader",
   "version": "0.4.2",
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=12.0.0"
   },
   "source": "src/macro.js",
   "main": "dist/raw.macro.js",

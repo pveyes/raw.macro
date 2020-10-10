@@ -96,42 +96,6 @@ const md = __raw_dynamic__0[locale][fileName];
 
 `;
 
-exports[`macros invalid dynamic value at the start of template literal: invalid dynamic value at the start of template literal 1`] = `
-
-import raw from '../macro';
-
-const a1 = raw(\`\${fixtureDir}/javascript.js\`);
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-Error: /Users/fatih/dev/pveyes/raw.macro/src/__tests__/macro.test.js: ../macro: Invalid value, variable interpolation can't be at the start of template literal
-
-`;
-
-exports[`macros invalid dynamic values exceed limit: invalid dynamic values exceed limit 1`] = `
-
-import raw from '../macro';
-
-const a1 = raw(\`./\${anotherDir}/\${fixtureDir}/\${fileName}.md\`);
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-Error: /Users/fatih/dev/pveyes/raw.macro/src/__tests__/macro.test.js: ../macro: Invalid value. You can only have 2 dynamic values max. 1 for directory name, 1 for file name.
-
-`;
-
-exports[`macros invalid file in dynamic directory: invalid file in dynamic directory 1`] = `
-
-import raw from '../macro';
-
-const a1 = raw(\`./\${fixtureDir}/index.js\`);
-
-      ↓ ↓ ↓ ↓ ↓ ↓
-
-Error: /Users/fatih/dev/pveyes/raw.macro/src/__tests__/macro.test.js: ../macro: Cannot resolve file /index.js in these directories: __snapshots__, fixtures, node_modules
-
-`;
-
 exports[`macros multiple dynamic import: multiple dynamic import 1`] = `
 
 import raw from '../macro';
