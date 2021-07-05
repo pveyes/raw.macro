@@ -47,6 +47,24 @@ const data = dynamic("en");
 
 `;
 
+exports[`macros dynamic import file name with space: dynamic import file name with space 1`] = `
+
+import raw from '../macro';
+
+const a0 = raw(\`./fixtures/en/\${file}\`);
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+var __raw_dynamic__0 = {
+  "file with space.md": "# File\\n",
+  "post.js": 'console.log("test");\\n',
+  "post.md": "English\\n",
+};
+const a0 = __raw_dynamic__0[file];
+
+
+`;
+
 exports[`macros dynamic import file name: dynamic import file name 1`] = `
 
 import raw from '../macro';
@@ -85,6 +103,7 @@ const md = raw(\`./fixtures/\${locale}/\${fileName}.md\`);
 
 var __raw_dynamic__0 = {
   en: {
+    "file with space": "# File\\n",
     post: "English\\n",
   },
   id: {

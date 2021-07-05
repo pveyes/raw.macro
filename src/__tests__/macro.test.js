@@ -27,7 +27,7 @@ pluginTester({
     `,
     "static template literal": `
       import raw from '../macro';
-      
+
       const macro = raw('raw.macro');
       const md = raw(\`./fixtures/markdown.md\`);
       const js = raw(\`./fixtures/javascript.js\`);
@@ -69,6 +69,11 @@ pluginTester({
       const a0 = raw('./fixtures/markdown.md');
       const a1 = raw(\`./\${fixtureDir}/markdown.md\`);
       const a2 = raw(\`./fixtures/\${fileName}\`);
+    `,
+    "dynamic import file name with space": `
+      import raw from '../macro';
+
+      const a0 = raw(\`./fixtures/en/\${file}\`);
     `,
   },
 });
