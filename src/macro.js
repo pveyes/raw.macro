@@ -36,7 +36,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   const args = callExpressionPath.get("arguments");
   const arg = args[0];
 
-  // Check for a provided encoding; defaul to utf-8
+  // Check for a provided encoding; default to utf-8
   if (args.length == 2 && arg.node.type === "StringLiteral") {
     rawEncoding = args[1].node.value;
   } else {

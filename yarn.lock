@@ -22,7 +22,7 @@
   "resolved" "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.18.5.tgz"
   "version" "7.18.5"
 
-"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.10.2", "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.18.5", "@babel/core@^7.8.0":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-0", "@babel/core@^7.10.2", "@babel/core@^7.11.6", "@babel/core@^7.12.3", "@babel/core@^7.18.5", "@babel/core@^7.8.0", "@babel/core@^7.9.0":
   "integrity" "sha512-MGY8vg3DxMnctw0LdvSEojOsumc70g0t18gNyUdAZqB1Rpd1Bqo/svHGvt+UJ6JcGX+DIekGFDxxIWofBxLCnQ=="
   "resolved" "https://registry.npmjs.org/@babel/core/-/core-7.18.5.tgz"
   "version" "7.18.5"
@@ -1512,10 +1512,10 @@
     "cosmiconfig" "^7.0.0"
     "resolve" "^1.19.0"
 
-"babel-plugin-tester@^10.1.0":
-  "integrity" "sha512-4P2tNaM/Mtg6ytA9YAqmgONnMYqWvdbGDuwRTpIIC9yFZGQrEHoyvDPCx+X1QALAufVb5DKieOPGj5dffiEiNg=="
-  "resolved" "https://registry.npmjs.org/babel-plugin-tester/-/babel-plugin-tester-10.1.0.tgz"
-  "version" "10.1.0"
+"babel-plugin-tester@^9.2.0":
+  "integrity" "sha512-HCbgmxOJXCcJ8hMk4ek6Ehfv0Ye7D7EpglNP8bh2gmRZnLPkKSJF+ufvypur/F38N3bEWWHYX4QfdnfLyql2DQ=="
+  "resolved" "https://registry.npmjs.org/babel-plugin-tester/-/babel-plugin-tester-9.2.0.tgz"
+  "version" "9.2.0"
   dependencies:
     "@types/babel-plugin-tester" "^9.0.0"
     "lodash.mergewith" "^4.6.2"
