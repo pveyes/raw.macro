@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`macros correct usage: correct usage 1`] = `
+exports[`unknown plugin correct usage: correct usage 1`] = `
 
 import raw from '../macro';
 
@@ -19,7 +19,7 @@ const js =
 
 `;
 
-exports[`macros dynamic import directory: dynamic import directory 1`] = `
+exports[`unknown plugin dynamic import directory: dynamic import directory 1`] = `
 
 import raw from '../macro';
 
@@ -47,7 +47,7 @@ const data = dynamic("en");
 
 `;
 
-exports[`macros dynamic import file name: dynamic import file name 1`] = `
+exports[`unknown plugin dynamic import file name: dynamic import file name 1`] = `
 
 import raw from '../macro';
 
@@ -75,7 +75,7 @@ const data = dynamic("markdown");
 
 `;
 
-exports[`macros dynamic import multiple variable: dynamic import multiple variable 1`] = `
+exports[`unknown plugin dynamic import multiple variable: dynamic import multiple variable 1`] = `
 
 import raw from '../macro';
 
@@ -96,7 +96,7 @@ const md = __raw_dynamic__0[locale][fileName];
 
 `;
 
-exports[`macros multiple dynamic import: multiple dynamic import 1`] = `
+exports[`unknown plugin multiple dynamic import: multiple dynamic import 1`] = `
 
 import raw from '../macro';
 
@@ -122,7 +122,7 @@ const a2 = __raw_dynamic__1[fileName];
 
 `;
 
-exports[`macros no usage: no usage 1`] = `
+exports[`unknown plugin no usage: no usage 1`] = `
 
 import raw from '../macro'
 
@@ -132,7 +132,33 @@ import raw from '../macro'
 
 `;
 
-exports[`macros static template literal using interpolation: static template literal using interpolation 1`] = `
+exports[`unknown plugin set encoding: set encoding 1`] = `
+
+import raw from '../macro';
+
+const a0 = raw('./fixtures/markdown.md', 'utf-8');
+const a1 = raw(\`./\${fixtureDir}/markdown.md\`, 'binary');
+const a2 = raw(\`./fixtures/\${fileName}\`, 'binary');
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+var __raw_dynamic__1 = {
+  "javascript.js":
+    'const sum = require("../sum");\\n\\ntest("add two numbers", () => {\\n  const result = sum(1, 2);\\n  expect(result).toEqual(3);\\n});\\n',
+  "mark.md": "## Another markdown\\n",
+  "markdown.md": "# This is the title\\n\\nThis is the description\\n",
+};
+var __raw_dynamic__0 = {
+  fixtures: "# This is the title\\n\\nThis is the description\\n",
+};
+const a0 = "# This is the title\\n\\nThis is the description\\n";
+const a1 = __raw_dynamic__0[fixtureDir];
+const a2 = __raw_dynamic__1[fileName];
+
+
+`;
+
+exports[`unknown plugin static template literal using interpolation: static template literal using interpolation 1`] = `
 
 import raw from '../macro';
 
@@ -147,7 +173,7 @@ const md = "# This is the title\\n\\nThis is the description\\n";
 
 `;
 
-exports[`macros static template literal: static template literal 1`] = `
+exports[`unknown plugin static template literal: static template literal 1`] = `
 
 import raw from '../macro';
 
