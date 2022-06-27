@@ -30,6 +30,16 @@ const markdown = raw("./README.md");
 
 One workaround that you can do that doesn't involve restarting your build system is making small changes where you put `raw()` calls, for example by adding `console.log()` with different content.
 
+### Custom Encoding
+
+If you want to use custom encoding (by default it will use `utf-8`), you can pass it to the second argument
+
+```js
+import raw from "raw.macro";
+
+const binary = raw("./path/to/binary", "binary");
+```
+
 ### Dynamic path import
 
 You can also use import dynamic path using [template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). You can even use them inside a function / React component!
