@@ -19,6 +19,32 @@ const js =
 
 `;
 
+exports[`macros custom encoding: custom encoding 1`] = `
+
+import raw from '../macro';
+
+const a0 = raw('./fixtures/markdown.md', 'utf-8');
+const a1 = raw(\`./\${fixtureDir}/markdown.md\`, 'binary');
+const a2 = raw(\`./fixtures/\${fileName}\`, 'binary');
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+var __raw_dynamic__1 = {
+  "javascript.js":
+    'const sum = require("../sum");\\n\\ntest("add two numbers", () => {\\n  const result = sum(1, 2);\\n  expect(result).toEqual(3);\\n});\\n',
+  "mark.md": "## Another markdown\\n",
+  "markdown.md": "# This is the title\\n\\nThis is the description\\n",
+};
+var __raw_dynamic__0 = {
+  fixtures: "# This is the title\\n\\nThis is the description\\n",
+};
+const a0 = "# This is the title\\n\\nThis is the description\\n";
+const a1 = __raw_dynamic__0[fixtureDir];
+const a2 = __raw_dynamic__1[fileName];
+
+
+`;
+
 exports[`macros dynamic import directory: dynamic import directory 1`] = `
 
 import raw from '../macro';

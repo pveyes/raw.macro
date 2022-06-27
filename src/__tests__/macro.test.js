@@ -70,6 +70,13 @@ pluginTester({
       const a1 = raw(\`./\${fixtureDir}/markdown.md\`);
       const a2 = raw(\`./fixtures/\${fileName}\`);
     `,
+    "custom encoding": `
+      import raw from '../macro';
+
+      const a0 = raw('./fixtures/markdown.md', 'utf-8');
+      const a1 = raw(\`./\${fixtureDir}/markdown.md\`, 'binary');
+      const a2 = raw(\`./fixtures/\${fileName}\`, 'binary');
+    `,
   },
 });
 

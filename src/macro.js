@@ -31,9 +31,17 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   const t = babel.types;
   const callExpressionPath = referencePath.parentPath;
   const dirname = path.dirname(filename);
-  let rawPath;
+  let rawPath, rawEncoding;
 
-  const arg = callExpressionPath.get("arguments")[0];
+  const args = callExpressionPath.get("arguments");
+  const arg = args[0];
+
+  // Check for a provided encoding; default to utf-8
+  if (args.length == 2 && arg.node.type === "StringLiteral") {
+    rawEncoding = args[1].node.value;
+  } else {
+    rawEncoding = "utf-8";
+  }
 
   switch (arg.node.type) {
     case "TemplateLiteral": {
@@ -141,6 +149,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
               pathEntries,
               rootDir,
               quasis[quasis.length - 1].value.raw,
+              rawEncoding,
             ),
           ),
         ]),
@@ -168,7 +177,7 @@ function requireRaw({ referencePath, state, babel, usageCounter }) {
   }
 
   const fullPath = require.resolve(rawPath, { paths: [dirname] });
-  const fileContent = fs.readFileSync(fullPath, { encoding: "utf-8" });
+  const fileContent = fs.readFileSync(fullPath, { encoding: rawEncoding });
 
   callExpressionPath.replaceWith(
     t.expressionStatement(t.stringLiteral(fileContent)),
@@ -180,6 +189,7 @@ function createObjectASTFromPathEntries(
   pathEntries,
   rootDir,
   fileName = "",
+  encoding = "utf-8",
 ) {
   const objectProperties = pathEntries
     .map((entry) => {
@@ -191,6 +201,7 @@ function createObjectASTFromPathEntries(
             entry[1],
             path.join(rootDir, entry[0]),
             fileName,
+            encoding,
           ),
         );
       }
@@ -208,7 +219,7 @@ function createObjectASTFromPathEntries(
         });
         return t.objectProperty(
           t.stringLiteral(entry.replace(fileName, "")),
-          t.stringLiteral(fs.readFileSync(fullPath, "utf-8")),
+          t.stringLiteral(fs.readFileSync(fullPath, { encoding })),
         );
       } catch (err) {
         return null;
