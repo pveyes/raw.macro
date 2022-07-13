@@ -1,4 +1,4 @@
-name: build
+name: build-and-test
 
 on:
   push:
@@ -6,13 +6,16 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  CARGO_TERM_COLOR: always
+
 jobs:
-  test:
+  babel:
     if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: ["12", "14"]
+        node_version: ["14", "16"]
         os: [ubuntu-latest, macOS-latest]
 
     steps:
@@ -26,3 +29,25 @@ jobs:
         run: |
           yarn install --pure-lockfile --prefer-offline
           yarn ci
+  swc:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ["14", "16"]
+        os: [ubuntu-latest, macOS-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: Add wasm32-wasi target
+        run: rustup target add wasm32-wasi
+
+      - name: Build & test
+        run: |
+          yarn install --pure-lockfile --prefer-offline
+          yarn swc
