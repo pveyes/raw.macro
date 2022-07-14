@@ -1,0 +1,15 @@
+{
+  "name": "swc_plugin_raw_macro",
+  "version": "0.1.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "keywords": [
+    "swc-plugin"
+  ],
+  "main": "target/wasm32-wasi/release/swc_plugin_raw_macro.wasm",
+  "scripts": {
+    "prepublishOnly": "cargo build --release --target wasm32-wasi"
+  },
+  "files": []
+}

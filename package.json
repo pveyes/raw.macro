@@ -3,15 +3,21 @@
   "description": "Read file contents at build time, similar to webpack raw-loader",
   "version": "0.5.0",
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
-  "source": "src/macro.js",
-  "main": "dist/raw.macro.js",
   "types": "raw.macro.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/raw.macro.js",
+      "import": "./dist/raw.macro.esm.js"
+    },
+    "./swc": "./swc/target/wasm32-wasi/release/swc_plugin_raw_macro.wasm"
+  },
   "license": "MIT",
   "files": [
     "dist/",
-    "raw.macro.d.ts"
+    "raw.macro.d.ts",
+    "swc/target/wasm32-wasi/release/"
   ],
   "keywords": [
     "webpack",
@@ -31,13 +37,23 @@
     "build": "microbundle",
     "format": "prettier --write",
     "ci": "npm run test -- --ci && npm run build",
-    "prepare": "npm run build"
+    "prepublishOnly": "npm run build && npm run swc",
+    "swc": "npm run swc:build && npm run swc:jest",
+    "swc:build": "cargo build --manifest-path ./swc/Cargo.toml --release --target=wasm32-wasi",
+    "swc:jest": "jest --config swc/test/jest.config.js --no-cache"
   },
-  "dependencies": {
+  "peerDependencies": {
     "babel-plugin-macros": "^2.8.0"
+  },
+  "peerDependenciesMeta": {
+    "babel-plugin-macros": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
+    "@swc/core": "^1.2.213",
+    "@swc/jest": "^0.2.21",
     "babel-plugin-tester": "^9.2.0",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
