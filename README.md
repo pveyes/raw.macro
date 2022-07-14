@@ -74,9 +74,10 @@ module.exports = {
       [
         "raw.macro/swc",
         {
-          rootDir: __dirname
-        }
+          rootDir: __dirname,
+        },
       ],
+    ],
   },
 };
 ```

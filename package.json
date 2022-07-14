@@ -17,7 +17,7 @@
   "files": [
     "dist/",
     "raw.macro.d.ts",
-    "swc/target/wasm32-wasi/release/"
+    "swc/target/wasm32-wasi/release/swc_plugin_raw_macro.wasm"
   ],
   "keywords": [
     "webpack",
