@@ -6,6 +6,7 @@
     "node": ">=14.0.0"
   },
   "types": "raw.macro.d.ts",
+  "main": "./dist/raw.macro.js",
   "exports": {
     ".": {
       "require": "./dist/raw.macro.js",
