@@ -1,7 +1,7 @@
 {
   "name": "raw.macro",
   "description": "Read file contents at build time, similar to webpack raw-loader",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "engines": {
     "node": ">=14.0.0"
   },
