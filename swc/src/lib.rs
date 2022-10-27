@@ -92,10 +92,7 @@ impl Fold for RawMacro {
         let mut mods: Vec<ModuleItem> = mods.fold_children_with(self);
 
         mods.retain(|m| match &m {
-            ModuleItem::ModuleDecl(md) => match &md {
-                ModuleDecl::Import(import) => &import.src.value != "raw.macro",
-                _ => true,
-            },
+            ModuleItem::ModuleDecl(ModuleDecl::Import(ImportDecl {src, ..})) =>  &src.value != "raw.macro",
             _ => true,
         });
         mods
@@ -107,11 +104,13 @@ impl Fold for RawMacro {
         let expr = expr.fold_children_with(self);
 
         match &expr {
-            Expr::Call(cexp) => match &cexp.callee {
-                Callee::Expr(cex) => match &**cex {
-                    Expr::Ident(i) => {
+            Expr::Call(CallExpr { args, callee: Callee::Expr(cex), ..}) => 
+                // in the feature stable of rust boxed, wee can use 
+                // match someBox { box Expr::Ident(i) => ... }
+                match &**cex {
+                    Expr::Ident(i) => 
                         if &*i.sym == self.local_sym {
-                            let raw_path = match cexp.args[0].expr.as_lit() {
+                            let raw_path = match args[0].expr.as_lit() {
                                 Some(lit) => match lit {
                                     Lit::Str(str) => String::from(&*str.value),
                                     _ => panic!("raw.macro expects string as first argument"),
@@ -123,11 +122,8 @@ impl Fold for RawMacro {
                         } else {
                             expr
                         }
-                    }
                     _ => expr,
                 },
-                _ => expr,
-            },
             _ => expr,
         }
     }
