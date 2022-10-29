@@ -1,7 +1,15 @@
 use serde::{Deserialize, Serialize};
 use std::{fs, path::PathBuf};
-use swc_ecma_visit::Fold;
-use swc_plugin::{ast::*, plugin_transform, syntax_pos::DUMMY_SP, TransformPluginProgramMetadata};
+use swc_core::common::DUMMY_SP;
+use swc_core::ecma::{
+    ast::*,
+    visit::{FoldWith, Fold},
+};
+use swc_core::plugin::{
+    plugin_transform,
+    proxies::TransformPluginProgramMetadata,
+    metadata::TransformPluginMetadataContextKind
+};
 
 #[derive(Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -9,14 +17,6 @@ pub struct Config {
     pub root_dir: Option<String>,
 }
 
-/// Additional context for the plugin.
-#[derive(Serialize, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct Context {
-    /// The name of the current file.
-    #[serde(default)]
-    pub filename: Option<String>,
-}
 pub struct RawMacro {
     local_sym: String,
     root: PathBuf,
@@ -69,7 +69,7 @@ impl RawMacro {
     }
 }
 
-// https://rustdoc.swc.rs/swc_ecma_visit/trait.VisitMut.html
+// https://docs.rs/swc_core/0.6.3/swc_core/visit/trait.Fold.html
 impl Fold for RawMacro {
     // get imported identifier
     fn fold_import_decl(&mut self, import: ImportDecl) -> ImportDecl {
@@ -131,15 +131,14 @@ impl Fold for RawMacro {
 
 #[plugin_transform]
 pub fn process_transform(program: Program, metadata: TransformPluginProgramMetadata) -> Program {
-    let config: Config =
-        serde_json::from_str(&metadata.plugin_config).expect("Should provide plugin config");
-
-    let context: Context =
-        serde_json::from_str(&metadata.transform_context).expect("failed to parse plugin context");
+    let config: Config = serde_json::from_str(
+        &metadata.get_transform_plugin_config()
+            .expect("Should provide plugin config")
+    ).unwrap();
 
     let root_dir = config
         .root_dir
         .expect("Should provide `rootDir` in plugin config");
-    let current_path = context.filename.unwrap();
-    program.fold_with(&mut RawMacro::new(root_dir, current_path))
+    let current_path = &metadata.get_context(&TransformPluginMetadataContextKind::Filename).unwrap();
+    program.fold_with(&mut RawMacro::new(root_dir, current_path.to_string()))
 }
