@@ -105,7 +105,7 @@ impl Fold for RawMacro {
 
         match &expr {
             Expr::Call(CallExpr { args, callee: Callee::Expr(cex), ..}) => 
-                // in the feature stable of rust boxed, wee can use 
+                // in the feature stable of rust boxed, we can use 
                 // match someBox { box Expr::Ident(i) => ... }
                 match &**cex {
                     Expr::Ident(i) => 
