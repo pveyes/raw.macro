@@ -35,7 +35,7 @@
   },
   "scripts": {
     "test": "jest --coverage",
-    "build": "microbundle",
+    "build": "microbundle -i src/macro.js",
     "format": "prettier --write",
     "ci": "npm run test -- --ci && npm run build",
     "prepublishOnly": "npm run build && npm run swc",
